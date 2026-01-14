@@ -1,0 +1,330 @@
+/* Snowy Bagel global styles (minimal, themeable) */
+
+:root {
+  color-scheme: light dark;
+
+  /* Typography */
+  --font-sans: "Fredoka", ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* Layout */
+  --container: 72rem;
+  --radius: 18px;
+
+  /* Light theme */
+  --bg: #fbfcff;
+  --text: #121826;
+  --muted: #5b6473;
+  --surface: rgba(255, 255, 255, 0.7);
+  --border: rgba(17, 24, 39, 0.12);
+  --shadow: 0 18px 50px rgba(17, 24, 39, 0.08);
+
+  /* Accents */
+  --accent: #2b7fff; /* icy blue */
+  --accent-2: #b7e3ff; /* pale frost */
+  --focus: rgba(43, 127, 255, 0.35);
+
+  /* Snow layer */
+  --snow: rgba(43, 127, 255, 0.14);
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b1020;
+  --text: #eef2ff;
+  --muted: #b7c0d6;
+  --surface: rgba(255, 255, 255, 0.06);
+  --border: rgba(238, 242, 255, 0.14);
+  --shadow: 0 22px 80px rgba(0, 0, 0, 0.45);
+
+  --accent: #8fd6ff;
+  --accent-2: #173152;
+  --focus: rgba(143, 214, 255, 0.35);
+
+  --snow: rgba(143, 214, 255, 0.15);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: radial-gradient(
+      1100px 700px at 20% -10%,
+      rgba(43, 127, 255, 0.13),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 600px at 100% 0%,
+      rgba(183, 227, 255, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 700px at 70% 120%,
+      rgba(43, 127, 255, 0.11),
+      transparent 55%
+    ),
+    var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(43, 127, 255, 0.22);
+}
+
+.container {
+  width: min(var(--container), calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.frame {
+  position: relative;
+  min-height: 100%;
+  overflow: clip;
+}
+
+.header {
+  position: relative;
+  z-index: 2;
+  padding: 1.25rem 0 1rem;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.wordmarkTitle {
+  font-size: clamp(1.15rem, 1.5vw + 0.9rem, 1.6rem);
+  letter-spacing: 0.2px;
+}
+
+.wordmarkTag {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.main {
+  position: relative;
+  z-index: 2;
+  padding: 3.5rem 0 3.25rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.25rem;
+  align-items: start;
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: clamp(2.3rem, 4vw + 1.1rem, 4.15rem);
+  letter-spacing: 0.4px;
+}
+
+.heroLead {
+  margin: 0.8rem 0 0;
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+.chips {
+  margin-top: 1.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.22) inset;
+  color: var(--muted);
+  font-size: 0.95rem;
+  backdrop-filter: blur(10px);
+}
+
+.sectionTitle {
+  margin: 0 0 0.9rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.2px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 1.05rem 1.05rem 1rem;
+  backdrop-filter: blur(12px);
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.badge {
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--accent-2), transparent 35%);
+  color: color-mix(in oklab, var(--text), var(--muted) 40%);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.cardBody {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.footer {
+  position: relative;
+  z-index: 2;
+  padding: 2.25rem 0 2.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.footerRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 1.1rem;
+}
+
+/* Theme toggle */
+.themeToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.22) inset;
+  color: var(--text);
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+
+.themeToggle:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--focus), 0 1px 0 rgba(255, 255, 255, 0.22) inset;
+}
+
+.themeToggleIcon {
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  background: color-mix(in oklab, var(--accent-2), transparent 35%);
+}
+
+.themeToggleLabel {
+  font-size: 0.95rem;
+  color: color-mix(in oklab, var(--text), var(--muted) 35%);
+}
+
+/* Snow decoration layer */
+.snow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+.snow::before,
+.snow::after {
+  content: "";
+  position: absolute;
+  inset: -40% 0 0 0;
+  background-image: radial-gradient(circle at 10% 10%, var(--snow) 0 1px, transparent 2px),
+    radial-gradient(circle at 30% 40%, var(--snow) 0 1.5px, transparent 3px),
+    radial-gradient(circle at 65% 20%, var(--snow) 0 1.2px, transparent 3px),
+    radial-gradient(circle at 90% 35%, var(--snow) 0 1.6px, transparent 3px),
+    radial-gradient(circle at 15% 75%, var(--snow) 0 1.2px, transparent 3px),
+    radial-gradient(circle at 55% 85%, var(--snow) 0 1.4px, transparent 3px);
+  background-size: 420px 420px;
+  filter: blur(0.2px);
+  transform: translate3d(0, -10%, 0);
+  animation: snowFall 18s linear infinite;
+}
+
+.snow::after {
+  opacity: 0.65;
+  background-size: 520px 520px;
+  animation-duration: 28s;
+  animation-direction: reverse;
+}
+
+@keyframes snowFall {
+  from {
+    transform: translate3d(0, -20%, 0);
+  }
+  to {
+    transform: translate3d(0, 10%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snow::before,
+  .snow::after {
+    animation: none;
+  }
+}
+

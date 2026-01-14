@@ -1,5 +1,7 @@
 ---
-
+import "../styles/global.css";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import LogoSnowyBagel from "../components/LogoSnowyBagel.astro";
 ---
 
 <html lang="en">
@@ -8,9 +10,111 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Snowy Bagel</title>
+		<meta
+			name="description"
+			content="Snowy Bagel — tiny, cozy lifestyle apps made with care. Coming soon."
+		/>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Set theme ASAP to avoid a flash before the toggle script runs -->
+		<script is:inline>
+			(() => {
+				try {
+					const STORAGE_KEY = "theme";
+					const root = document.documentElement;
+					const stored = localStorage.getItem(STORAGE_KEY);
+					const system =
+						window.matchMedia &&
+						window.matchMedia("(prefers-color-scheme: dark)").matches
+							? "dark"
+							: "light";
+					const theme = stored === "light" || stored === "dark" ? stored : system;
+					root.dataset.theme = theme;
+				} catch {
+					// noop
+				}
+			})();
+		</script>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<div class="frame">
+			<div class="snow" aria-hidden="true"></div>
+
+			<header class="header">
+				<div class="container headerRow">
+					<a class="brand" href="/" aria-label="Snowy Bagel home">
+						<LogoSnowyBagel size={44} />
+						<span class="wordmark">
+							<span class="wordmarkTitle">Snowy Bagel</span>
+							<span class="wordmarkTag">whimsical indie apps</span>
+						</span>
+					</a>
+
+					<ThemeToggle />
+				</div>
+			</header>
+
+			<main class="main">
+				<div class="container">
+					<section class="hero" aria-labelledby="hero-title">
+						<div>
+							<h1 id="hero-title" class="heroTitle">Snowy Bagel</h1>
+							<p class="heroLead">
+								Tiny, cozy lifestyle apps — built slowly, thoughtfully, and (hopefully)
+								with a little extra capacity in mind.
+							</p>
+
+							<div class="chips" aria-label="Themes">
+								<span class="chip" aria-hidden="true">❄</span>
+								<span class="chip">whimsical</span>
+								<span class="chip">wintry</span>
+								<span class="chip">useful</span>
+							</div>
+						</div>
+
+						<div>
+							<h2 class="sectionTitle">Coming soon</h2>
+							<div class="cards">
+								<article class="card">
+									<div class="cardTitleRow">
+										<h3 class="cardTitle">Spoonful</h3>
+										<span class="badge">in the oven</span>
+									</div>
+									<p class="cardBody">
+										A household chore helper that’s mindful of spoon theory — so tasks can
+										match real-life energy and capacity.
+									</p>
+								</article>
+
+								<article class="card">
+									<div class="cardTitleRow">
+										<h3 class="cardTitle">More apps</h3>
+										<span class="badge">coming soon</span>
+									</div>
+									<p class="cardBody">
+										Small tools for small problems. If you have a delightful niche need, I
+										probably do too.
+									</p>
+								</article>
+							</div>
+						</div>
+					</section>
+				</div>
+			</main>
+
+			<footer class="footer">
+				<div class="container footerRow">
+					<span>© {new Date().getFullYear()} Snowy Bagel</span>
+					<span>Made by Gabby Wilson</span>
+				</div>
+			</footer>
+		</div>
 	</body>
 </html>

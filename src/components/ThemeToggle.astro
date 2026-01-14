@@ -1,0 +1,51 @@
+---
+// Client-side theme toggle (no framework)
+---
+
+<button
+  id="theme-toggle"
+  class="themeToggle"
+  type="button"
+  aria-label="Toggle color theme"
+  aria-pressed="false"
+>
+  <span class="themeToggleIcon" aria-hidden="true">◐</span>
+  <span class="themeToggleLabel">Theme</span>
+</button>
+
+<script is:inline>
+  (() => {
+    const STORAGE_KEY = "theme";
+    const root = document.documentElement;
+    const btn = document.getElementById("theme-toggle");
+
+    const systemPref = () =>
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+
+    const getInitialTheme = () => {
+      const fromDom = root.dataset.theme;
+      if (fromDom === "light" || fromDom === "dark") return fromDom;
+      const fromStorage = localStorage.getItem(STORAGE_KEY);
+      if (fromStorage === "light" || fromStorage === "dark") return fromStorage;
+      return systemPref();
+    };
+
+    const applyTheme = (theme) => {
+      root.dataset.theme = theme;
+      if (btn) btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+    };
+
+    applyTheme(getInitialTheme());
+
+    btn?.addEventListener("click", () => {
+      const current = root.dataset.theme === "dark" ? "dark" : "light";
+      const next = current === "dark" ? "light" : "dark";
+      localStorage.setItem(STORAGE_KEY, next);
+      applyTheme(next);
+    });
+  })();
+</script>
+
