@@ -105,13 +105,22 @@ body {
   margin: 0;
   font-family: var(--font-body);
   font-weight: 500;
-  background:
-    radial-gradient(ellipse 1200px 800px at 30% -15%, var(--bg-gradient-1), transparent 60%),
-    radial-gradient(ellipse 1000px 700px at 85% 10%, var(--bg-gradient-2), transparent 55%),
-    radial-gradient(ellipse 900px 900px at 50% 100%, var(--bg-gradient-3), transparent 60%),
-    var(--bg);
+  background: var(--bg);
   color: var(--text);
   line-height: 1.6;
+}
+
+/* Fixed gradient overlay so it covers entire viewport seamlessly */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 140% 60% at 30% 0%, var(--bg-gradient-1), transparent 70%),
+    radial-gradient(ellipse 120% 50% at 90% 10%, var(--bg-gradient-2), transparent 60%),
+    radial-gradient(ellipse 130% 70% at 50% 100%, var(--bg-gradient-3), transparent 65%);
 }
 
 a {
