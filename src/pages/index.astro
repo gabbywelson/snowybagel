@@ -5,116 +5,90 @@ import LogoSnowyBagel from "../components/LogoSnowyBagel.astro";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Snowy Bagel</title>
-		<meta
-			name="description"
-			content="Snowy Bagel — tiny, cozy lifestyle apps made with care. Coming soon."
-		/>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Snowy Bagel</title>
+    <meta
+      name="description"
+      content="Snowy Bagel — tiny, cozy lifestyle apps made with care. Coming soon."
+    />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap"
-			rel="stylesheet"
-		/>
+    <!-- Preconnect for fonts loaded via CSS @import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-		<!-- Set theme ASAP to avoid a flash before the toggle script runs -->
-		<script is:inline>
-			(() => {
-				try {
-					const STORAGE_KEY = "theme";
-					const root = document.documentElement;
-					const stored = localStorage.getItem(STORAGE_KEY);
-					const system =
-						window.matchMedia &&
-						window.matchMedia("(prefers-color-scheme: dark)").matches
-							? "dark"
-							: "light";
-					const theme = stored === "light" || stored === "dark" ? stored : system;
-					root.dataset.theme = theme;
-				} catch {
-					// noop
-				}
-			})();
-		</script>
-	</head>
-	<body>
-		<div class="frame">
-			<div class="snow" aria-hidden="true"></div>
+    <!-- Set theme ASAP to avoid flash -->
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const system = window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.dataset.theme = stored === "light" || stored === "dark" ? stored : system;
+        } catch {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="frame">
+      <!-- Amplified snow background -->
+      <div class="snow-bg" aria-hidden="true"></div>
+      <div class="snow-bg-extra" aria-hidden="true"></div>
 
-			<header class="header">
-				<div class="container headerRow">
-					<a class="brand" href="/" aria-label="Snowy Bagel home">
-						<LogoSnowyBagel size={44} />
-						<span class="wordmark">
-							<span class="wordmarkTitle">Snowy Bagel</span>
-							<span class="wordmarkTag">whimsical indie apps</span>
-						</span>
-					</a>
+      <header class="header">
+        <div class="container headerRow">
+          <ThemeToggle />
+        </div>
+      </header>
 
-					<ThemeToggle />
-				</div>
-			</header>
+      <main class="main">
+        <section class="hero" aria-labelledby="hero-title">
+          <!-- Big centered mascot -->
+          <div class="mascot">
+            <LogoSnowyBagel size={280} />
+          </div>
 
-			<main class="main">
-				<div class="container">
-					<section class="hero" aria-labelledby="hero-title">
-						<div>
-							<h1 id="hero-title" class="heroTitle">Snowy Bagel</h1>
-							<p class="heroLead">
-								Tiny, cozy lifestyle apps — built slowly, thoughtfully, and (hopefully)
-								with a little extra capacity in mind.
-							</p>
+          <div>
+            <h1 id="hero-title" class="heroTitle">Snowy Bagel</h1>
+            <p class="heroTagline">
+              Tiny, cozy lifestyle apps — baked slowly with care
+            </p>
+          </div>
+        </section>
 
-							<div class="chips" aria-label="Themes">
-								<span class="chip" aria-hidden="true">❄</span>
-								<span class="chip">whimsical</span>
-								<span class="chip">wintry</span>
-								<span class="chip">useful</span>
-							</div>
-						</div>
+        <section class="comingSoon" aria-labelledby="coming-soon-label">
+          <span id="coming-soon-label" class="sectionLabel">Coming Soon</span>
+          
+          <div class="cards">
+            <article class="card wiggle">
+              <span class="cardBadge">Baking</span>
+              <div class="cardIcon">🥄</div>
+              <h3 class="cardTitle">Spoonful</h3>
+              <p class="cardDesc">
+                A household chore helper that's mindful of spoon theory — matching tasks to your real-life energy and capacity.
+              </p>
+            </article>
 
-						<div>
-							<h2 class="sectionTitle">Coming soon</h2>
-							<div class="cards">
-								<article class="card">
-									<div class="cardTitleRow">
-										<h3 class="cardTitle">Spoonful</h3>
-										<span class="badge">in the oven</span>
-									</div>
-									<p class="cardBody">
-										A household chore helper that’s mindful of spoon theory — so tasks can
-										match real-life energy and capacity.
-									</p>
-								</article>
+            <article class="card wiggle">
+              <span class="cardBadge">Soon</span>
+              <div class="cardIcon">✨</div>
+              <h3 class="cardTitle">More goodies</h3>
+              <p class="cardDesc">
+                Small tools for small problems. If you have a delightful niche need, I probably do too!
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
 
-								<article class="card">
-									<div class="cardTitleRow">
-										<h3 class="cardTitle">More apps</h3>
-										<span class="badge">coming soon</span>
-									</div>
-									<p class="cardBody">
-										Small tools for small problems. If you have a delightful niche need, I
-										probably do too.
-									</p>
-								</article>
-							</div>
-						</div>
-					</section>
-				</div>
-			</main>
-
-			<footer class="footer">
-				<div class="container footerRow">
-					<span>© {new Date().getFullYear()} Snowy Bagel</span>
-					<span>Made by Gabby Wilson</span>
-				</div>
-			</footer>
-		</div>
-	</body>
+      <footer class="footer">
+        <div class="footerContent">
+          <span>© {new Date().getFullYear()} Snowy Bagel</span>
+          <span>Made with <span class="footerHeart">♥</span> by Gabby Welson</span>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>
