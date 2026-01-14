@@ -358,6 +358,15 @@ a {
   max-width: 38ch;
 }
 
+.heroAbout {
+  margin: 1.25rem 0 0;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  color: var(--text-soft);
+  max-width: 44ch;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
 /* Coming soon section */
 .comingSoon {
   margin-top: 3.5rem;
