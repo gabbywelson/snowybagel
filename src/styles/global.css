@@ -305,8 +305,32 @@ a {
 }
 
 .mascot {
-  max-width: 280px;
+  max-width: 320px;
   width: 100%;
+}
+
+.mascotImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: floatMascot 4s ease-in-out infinite;
+  filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes floatMascot {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascotImg {
+    animation: none;
+  }
 }
 
 .heroTitle {
